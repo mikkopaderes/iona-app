@@ -36,17 +36,6 @@ test('given a list of breed, when rendering, then it should render each one', as
   expect(elements[1]).toHaveTextContent('Name 2');
 });
 
-test('given a selected breed, when rendering, then it should preselect the breed', async () => {
-  const selectedBreed = breeds[2];
-  const onBreedChange = jest.fn();
-
-  render(<TopBar breeds={breeds} selectedBreed={selectedBreed} onBreedChange={onBreedChange} />);
-
-  const element = await screen.findByTestId('breed-field');
-
-  expect(element).toHaveValue('test_breed_2');
-});
-
 test('given a rendered list of breed, when selecting one, then it should trigger an external function', async () => {
   const selectedBreed = null;
   const onBreedChange = jest.fn();

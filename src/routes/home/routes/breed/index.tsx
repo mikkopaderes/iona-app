@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 
 import { CatImageData, CatImageModel } from 'models/cat-image';
+import useToastContext from 'hooks/use-toast-context';
 import CatImageDeck from './components/cat-image-deck';
 
 async function fetchCatImages(breedId: string, page: number = 1): Promise<CatImageModel[]> {
@@ -35,16 +36,21 @@ function HomeBreed(): JSX.Element {
   const [catImages, setCatImages] = useState<CatImageModel[]>([]);
   const [page, setPage] = useState<number>(1);
   const [isLoadMoreDisabled, setIsLoadMoreDisabled] = useState<boolean>(false);
+  const showToast = useToastContext();
 
   useEffect(() => {
     async function doEffect() {
-      const newCatImages = await fetchCatImages(params.breed_id as string);
+      try {
+        const newCatImages = await fetchCatImages(params.breed_id as string);
 
-      setCatImages(newCatImages);
+        setCatImages(newCatImages);
+      } catch {
+        showToast('Couldn\'t load de cat image right now. Woof! ;)');
+      }
     }
 
     doEffect();
-  }, [params.breed_id]);
+  }, [params.breed_id, showToast]);
 
   useEffect(() => {
     setIsLoadMoreDisabled(false);
