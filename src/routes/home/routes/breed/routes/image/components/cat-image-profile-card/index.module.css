@@ -1,0 +1,12 @@
+.host {
+  border: 0;
+  overflow-y: auto;
+}
+
+.image {
+  width: 100%;
+  max-width: 640px;
+  height: 170px;
+  border-radius: 0;
+  object-fit: cover;
+}

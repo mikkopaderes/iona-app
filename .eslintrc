@@ -1,0 +1,14 @@
+{
+  "extends": ["airbnb", "airbnb-typescript", "airbnb/hooks"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    // Manual override due to bug
+    // See: https://github.com/airbnb/javascript/pull/2501
+    "react/function-component-definition": ["error", {
+      "namedComponents": "function-declaration",
+      "unnamedComponents": "function-expression"
+    }]
+  }
+}
